@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Pen Tracking & Inventory | N Farms</title>
+  <meta name="description" content="Monitor real-time bird maturation stages, daily egg collections, and upcoming processing cycles. Reserve fresh broilers directly from active pen batches.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Sticky Navigation Header -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">N FARMS</a>
+
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span>Harvest Active · Accepting Orders</span>
+      </div>
+
+      <nav class="nav-links" id="nav-menu" aria-label="Primary Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="inventory.html" class="nav-link" aria-current="page">Inventory</a>
+        <a href="order.html" class="nav-link">Order Now</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="inventory.html" class="btn btn-primary">Check Live Batches</a>
+        <button class="nav-toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+          <span class="nav-toggle-bar"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Page Header -->
+    <section class="container" style="padding-top: 4.5rem; padding-bottom: 2.5rem;">
+      <div style="max-width: 760px;">
+        <p style="font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-warm); font-weight: 600; margin-bottom: 1rem;">
+          LIVE HARVEST ENGINE
+        </p>
+        <h1 style="font-size: clamp(2rem, 4.5vw, 3.25rem); line-height: 1.15; margin-bottom: 1.25rem;">
+          Real-Time Pen Tracking & Inventory
+        </h1>
+        <p style="font-size: 1.0625rem; line-height: 1.65;">
+          Monitor bird maturation stages, daily egg collections, and upcoming processing cycles. Reserve ahead of harvest day.
+        </p>
+      </div>
+    </section>
+
+    <!-- Live Stock & Batch Grid -->
+    <section class="container" style="padding-bottom: 4rem;">
+      <div id="live-inventory-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+        
+        <!-- Broiler Batch Tracker Card -->
+        <article class="card" id="card-batch-b2409" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+              <div>
+                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Pen Cycle 04</span>
+                <h2 style="font-size: 1.35rem; margin-top: 0.25rem;">Batch #B-24-09</h2>
+              </div>
+              <span class="status-pill">
+                <span class="status-dot"></span>
+                <span>Active Maturation</span>
+              </span>
+            </div>
+
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              Breed: <strong style="color: var(--text-primary); font-weight: 500;">Cobb 500 Heavy Broilers</strong>
+            </p>
+
+            <!-- Maturation Progress Bar -->
+            <div style="margin-bottom: 1.5rem;">
+              <div style="display: flex; justify-content: space-between; font-size: 0.8125rem; margin-bottom: 0.5rem;">
+                <span style="color: var(--text-muted);">Cycle Progress</span>
+                <span style="color: var(--accent-green); font-weight: 600;">Day 38 of 42 (90%)</span>
+              </div>
+              <div style="width: 100%; height: 6px; background-color: var(--border); border-radius: var(--radius-full); overflow: hidden;">
+                <div style="width: 90%; height: 100%; background-color: var(--accent-green); border-radius: var(--radius-full);"></div>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1rem; background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 1.75rem;">
+              <div>
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Est. Weight</span>
+                <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">2.3kg – 2.6kg</span>
+              </div>
+              <div>
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Harvest Window</span>
+                <span style="font-size: 0.9375rem; font-weight: 600; color: var(--accent-warm);">In 4 Days</span>
+              </div>
+              <div style="grid-column: span 2; border-top: 1px solid var(--border); padding-top: 0.75rem;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Available for Reservation</span>
+                <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">140 Birds Remaining</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="order.html?batch=B-24-09" class="btn btn-primary" style="width: 100%;">Reserve From This Batch</a>
+        </article>
+
+        <!-- Table Eggs Card -->
+        <article class="card" id="card-table-eggs" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+              <div>
+                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Daily Layer House</span>
+                <h2 style="font-size: 1.35rem; margin-top: 0.25rem;">Fresh Table Eggs</h2>
+              </div>
+              <span class="status-pill">
+                <span class="status-dot"></span>
+                <span>In Stock</span>
+              </span>
+            </div>
+
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              Grade: <strong style="color: var(--text-primary); font-weight: 500;">Large Table Eggs (Brown Shell)</strong>
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; padding: 1rem; background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 1.75rem;">
+              <div>
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Collection Time</span>
+                <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">06:30 AM Today</span>
+              </div>
+              <div>
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Freshness Window</span>
+                <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">Best within 21 Days</span>
+              </div>
+              <div style="grid-column: span 2; border-top: 1px solid var(--border); padding-top: 0.75rem;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Stock on Farm Floor</span>
+                <span style="font-size: 1.125rem; font-weight: 700; color: var(--accent-green);">48 Crates Available</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="order.html?item=eggs" class="btn btn-secondary" style="width: 100%;">Order Crates</a>
+        </article>
+
+        <!-- Layer Cull / Upcoming Card -->
+        <article class="card" id="card-batch-l18" style="display: flex; flex-direction: column; justify-content: space-between;">
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+              <div>
+                <span style="font-size: 0.75rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">Upcoming Pen Clearance</span>
+                <h2 style="font-size: 1.35rem; margin-top: 0.25rem;">Batch #L-18 (Spent Layers)</h2>
+              </div>
+              <span class="status-pill status-warm">
+                <span class="status-dot"></span>
+                <span>Scheduled</span>
+              </span>
+            </div>
+
+            <p style="font-size: 0.875rem; color: var(--text-muted); margin-bottom: 1.5rem;">
+              Type: <strong style="color: var(--text-primary); font-weight: 500;">Hardy Soup & Stew Birds</strong>
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr; gap: 1rem; padding: 1rem; background: var(--bg-main); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 1.75rem;">
+              <div>
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Next Clearance Cycle</span>
+                <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">Opening in 18 Days</span>
+              </div>
+              <div style="border-top: 1px solid var(--border); padding-top: 0.75rem;">
+                <span style="font-size: 0.75rem; color: var(--text-muted); display: block;">Planned Volume</span>
+                <span style="font-size: 0.9375rem; font-weight: 600; color: var(--text-primary);">~600 Birds</span>
+              </div>
+            </div>
+          </div>
+
+          <a href="#batch-schedule" class="btn btn-secondary" style="width: 100%;">Set Restock Alert</a>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- Batch Cycle Schedule -->
+    <section class="container" id="batch-schedule" style="padding-bottom: 4rem;">
+      <div style="margin-bottom: 1.75rem;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Production & Harvest Pipeline</h2>
+        <p style="font-size: 0.875rem;">Confirmed cycle schedule for wholesale buyers and planned pen turnarounds.</p>
+      </div>
+
+      <div style="overflow-x: auto; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-md);">
+        <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.875rem;">
+          <thead>
+            <tr style="border-bottom: 1px solid var(--border); background: rgba(11, 15, 18, 0.5);">
+              <th style="padding: 1rem 1.25rem; font-weight: 600; color: var(--text-primary);">Batch ID</th>
+              <th style="padding: 1rem 1.25rem; font-weight: 600; color: var(--text-primary);">Hatch Date</th>
+              <th style="padding: 1rem 1.25rem; font-weight: 600; color: var(--text-primary);">Target Harvest</th>
+              <th style="padding: 1rem 1.25rem; font-weight: 600; color: var(--text-primary);">Planned Capacity</th>
+              <th style="padding: 1rem 1.25rem; font-weight: 600; color: var(--text-primary);">Cycle Status</th>
+            </tr>
+          </thead>
+          <tbody id="batch-table-body">
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 1rem 1.25rem; font-weight: 600; color: var(--text-primary);">#B-24-09</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Aug 01, 2026</td>
+              <td style="padding: 1rem 1.25rem; color: var(--accent-warm);">Sep 12, 2026</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">1,200 Birds</td>
+              <td style="padding: 1rem 1.25rem;">
+                <span class="status-pill" style="font-size: 0.6875rem;">
+                  <span class="status-dot"></span>
+                  <span>Final Finishing</span>
+                </span>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 1rem 1.25rem; font-weight: 600; color: var(--text-primary);">#B-24-10</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Aug 22, 2026</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Oct 03, 2026</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">1,500 Birds</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Growing (Day 17)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--border);">
+              <td style="padding: 1rem 1.25rem; font-weight: 600; color: var(--text-primary);">#B-24-11</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Sep 05, 2026</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Oct 17, 2026</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">1,500 Birds</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Brooding (Day 03)</td>
+            </tr>
+            <tr>
+              <td style="padding: 1rem 1.25rem; font-weight: 600; color: var(--text-primary);">#B-24-08</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Jul 10, 2026</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Aug 21, 2026</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">1,000 Birds</td>
+              <td style="padding: 1rem 1.25rem; color: var(--text-muted);">Sold Out / Dispatched</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Wholesale & Direct Logistics Banner -->
+    <section class="container" style="padding-bottom: 2rem;">
+      <div class="card" style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.5rem; background: linear-gradient(180deg, var(--bg-card) 0%, rgba(19, 24, 29, 0.7) 100%); border-color: #2a3440;">
+        <div style="max-width: 640px;">
+          <h3 style="font-size: 1.25rem; margin-bottom: 0.35rem;">Wholesale & Cold-Room Supply</h3>
+          <p style="font-size: 0.875rem;">
+            Buying in bulk for catering, hotels, or cold-room distribution? Lock in wholesale pen rates and dedicated harvest slots.
+          </p>
+        </div>
+        <a href="contact.html" class="btn btn-primary">Contact Farm Logistics</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div style="max-width: 360px;">
+          <div class="brand-logo" style="margin-bottom: 0.75rem;">N FARMS</div>
+          <p style="font-size: 0.875rem; line-height: 1.6;">
+            A modern poultry enterprise engineered around biological integrity, cold-chain speed, and harvest transparency.
+          </p>
+        </div>
+
+        <nav class="footer-nav" aria-label="Footer Navigation">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="inventory.html" class="footer-link">Inventory</a>
+          <a href="order.html" class="footer-link">Order Now</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </nav>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          Dispatch & Gate Operations: Monday – Saturday, 07:00 – 17:00 WAT
+        </p>
+        <p class="footer-copyright">
+          &copy; 2026 N Farms. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js" defer></script>
+  <script src="js/inventory.js" defer></script>
+</body>
+</html>
