@@ -776,44 +776,51 @@ th {
 /* Mobile spacing fixes */
 @media (max-width: 639px) {
   .container {
-    padding-left: 20px;
-    padding-right: 20px;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
   .hero {
-    padding: 2rem 0 1.5rem;
+    padding: 2rem 0 1.5rem !important;
   }
 
   .hero-title {
-    font-size: 1.5rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.5rem !important;
+    margin-bottom: 0.75rem !important;
   }
 
   .hero-lead {
-    font-size: 0.95rem;
-    margin-bottom: 1.25rem;
+    font-size: 0.95rem !important;
+    margin-bottom: 1.25rem !important;
   }
 
   .hero-kicker {
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem !important;
   }
 
   .section-title {
-    font-size: 1.25rem;
-    margin-bottom: 0.75rem;
+    font-size: 1.25rem !important;
+    margin-bottom: 0.75rem !important;
   }
 
   .section-desc {
-    margin-bottom: 1.5rem;
-    font-size: 0.9rem;
+    margin-bottom: 1.5rem !important;
+    font-size: 0.9rem !important;
   }
 
   section {
-    padding: 2rem 0;
+    padding: 2rem 0 !important;
   }
 
   .card {
-    padding: 1rem;
+    padding: 1rem !important;
+  }
+
+  /* Override inline padding on cards */
+  [style*="padding: 2.5rem 1rem"],
+  [style*="padding: 2rem 1rem"],
+  [style*="padding: 3rem 2rem"] {
+    padding: 1.25rem 1rem !important;
   }
 
   div[style*="grid-template-columns: 1fr 1fr"] {
