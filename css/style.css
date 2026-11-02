@@ -406,6 +406,121 @@ textarea:focus {
   cursor: pointer;
 }
 
+@media (min-width: 769px) {
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-links {
+    position: static;
+    height: auto;
+    width: auto;
+    background: transparent;
+    border: none;
+    display: flex !important;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 0;
+    transform: none;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    overflow-y: visible;
+  }
+
+  .nav-link {
+    font-size: 0.9rem;
+    padding: 0;
+    border-bottom: none;
+    width: auto;
+  }
+
+  .status-pill {
+    display: none;
+  }
+
+  .footer-inner {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+  }
+
+  .footer-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 639px) {
+  .grid-cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  div[style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  div[style*="grid-template-columns: 1fr;"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  .status-pill {
+    font-size: 0.7rem;
+    padding: 3px 8px;
+  }
+
+  .hero-title {
+    font-size: 1.5rem;
+  }
+
+  .hero-lead {
+    font-size: 0.95rem;
+  }
+
+  .section-title {
+    font-size: 1.25rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+  }
+
+  .footer-inner {
+    align-items: center;
+    text-align: center;
+  }
+
+  .footer-nav {
+    width: 100%;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .table-wrap {
+    font-size: 0.8rem;
+  }
+
+  th, td {
+    padding: 0.6rem 0.75rem;
+  }
+}
+
 /* Quantity picker */
 .qty-control {
   display: inline-flex;
