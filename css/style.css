@@ -776,8 +776,8 @@ th {
 /* Mobile spacing fixes */
 @media (max-width: 639px) {
   .container {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 32px;
+    padding-right: 32px;
   }
 
   .hero {
@@ -785,12 +785,12 @@ th {
   }
 
   .hero-title {
-    font-size: 1.5rem !important;
+    font-size: 1.4rem !important;
     margin-bottom: 0.75rem !important;
   }
 
   .hero-lead {
-    font-size: 0.95rem !important;
+    font-size: 0.9rem !important;
     margin-bottom: 1.25rem !important;
   }
 
@@ -799,13 +799,13 @@ th {
   }
 
   .section-title {
-    font-size: 1.25rem !important;
+    font-size: 1.2rem !important;
     margin-bottom: 0.75rem !important;
   }
 
   .section-desc {
     margin-bottom: 1.5rem !important;
-    font-size: 0.9rem !important;
+    font-size: 0.85rem !important;
   }
 
   section {
@@ -835,6 +835,11 @@ th {
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
+  }
+
+  /* Ensure all text has breathing room */
+  h1, h2, h3, h4, p, span, a {
+    word-break: break-word;
   }
 }
 }
