@@ -776,21 +776,21 @@ th {
 /* Mobile spacing fixes */
 @media (max-width: 639px) {
   .container {
-    padding-left: 48px;
-    padding-right: 48px;
+    padding-left: 64px;
+    padding-right: 64px;
   }
 
   .hero {
-    padding: 3rem 0 2.5rem !important;
+    padding: 3.5rem 0 3rem !important;
   }
 
   .hero-title {
-    font-size: 1.35rem !important;
+    font-size: 1.3rem !important;
     margin-bottom: 0.75rem !important;
   }
 
   .hero-lead {
-    font-size: 0.9rem !important;
+    font-size: 0.85rem !important;
     margin-bottom: 1.5rem !important;
   }
 
