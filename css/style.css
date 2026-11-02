@@ -776,12 +776,12 @@ th {
 /* Mobile spacing fixes */
 @media (max-width: 639px) {
   .container {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 48px;
+    padding-right: 48px;
   }
 
   .hero {
-    padding: 2.5rem 0 2rem !important;
+    padding: 3rem 0 2.5rem !important;
   }
 
   .hero-title {
@@ -809,7 +809,7 @@ th {
   }
 
   section {
-    padding: 2.5rem 0 !important;
+    padding: 3rem 0 !important;
   }
 
   .card {
@@ -834,7 +834,7 @@ th {
   .footer-nav {
     flex-direction: column;
     align-items: center;
-    gap: 0.75rem;
+    gap: 1rem;
   }
 
   /* Ensure all text has breathing room */
