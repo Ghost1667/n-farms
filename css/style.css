@@ -776,22 +776,22 @@ th {
 /* Mobile spacing fixes */
 @media (max-width: 639px) {
   .container {
-    padding-left: 32px;
-    padding-right: 32px;
+    padding-left: 40px;
+    padding-right: 40px;
   }
 
   .hero {
-    padding: 2rem 0 1.5rem !important;
+    padding: 2.5rem 0 2rem !important;
   }
 
   .hero-title {
-    font-size: 1.4rem !important;
+    font-size: 1.35rem !important;
     margin-bottom: 0.75rem !important;
   }
 
   .hero-lead {
     font-size: 0.9rem !important;
-    margin-bottom: 1.25rem !important;
+    margin-bottom: 1.5rem !important;
   }
 
   .hero-kicker {
@@ -809,11 +809,11 @@ th {
   }
 
   section {
-    padding: 2rem 0 !important;
+    padding: 2.5rem 0 !important;
   }
 
   .card {
-    padding: 1rem !important;
+    padding: 1.25rem !important;
   }
 
   /* Override inline padding on cards */
