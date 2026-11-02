@@ -10,18 +10,32 @@ document.addEventListener('DOMContentLoaded', () => {
   /* --------------------------------------------------------------------------
      1. Configuration & Pricing Constants
      -------------------------------------------------------------------------- */
-  const FARM_WHATSAPP = '2348000000000'; // Replace with active business WhatsApp line
-
-  const UNIT_PRICES = {
-    dressed: 6500,
-    live: 6000,
-    eggs: 4200
+  const getUnitPrice = (item) => {
+    if (window.NFFarmsConfig) {
+      const price = window.NFFarmsConfig.getPrice(item);
+      if (price !== null) return price;
+    }
+    return item === 'dressed' ? 6500 : item === 'live' ? 6000 : 4200;
   };
 
-  const DELIVERY_COST = 2500;
+  const getDeliveryCost = () => {
+    if (window.NFFarmsConfig) {
+      const cost = window.NFFarmsConfig.getPrice('delivery');
+      if (cost !== null) return cost;
+    }
+    return 2500;
+  };
+
+  const getFarmWhatsapp = () => {
+    if (window.NFFarmsConfig) {
+      const wp = window.NFFarmsConfig.getContact('whatsapp');
+      if (wp) return wp;
+    }
+    return '2348000000000';
+  };
 
   // Active state cache
-  let selectedBatchId = 'Standard Harvest';
+  let selectedBatchId = 'Standard Batch';
 
   /* --------------------------------------------------------------------------
      2. DOM Element Selectors
@@ -87,9 +101,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const qtyLive = getCleanQty(inputLive);
     const qtyEggs = getCleanQty(inputEggs);
 
-    const costDressed = qtyDressed * UNIT_PRICES.dressed;
-    const costLive = qtyLive * UNIT_PRICES.live;
-    const costEggs = qtyEggs * UNIT_PRICES.eggs;
+    const costDressed = qtyDressed * getUnitPrice('dressed');
+    const costLive = qtyLive * getUnitPrice('live');
+    const costEggs = qtyEggs * getUnitPrice('eggs');
 
     const subtotal = costDressed + costLive + costEggs;
     const totalItems = qtyDressed + qtyLive + qtyEggs;
@@ -97,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Determine Fulfillment Method
     const activeFulfillment = document.querySelector('input[name="fulfillment"]:checked');
     const isDelivery = activeFulfillment ? activeFulfillment.value === 'delivery' : false;
-    const deliveryFee = isDelivery && totalItems > 0 ? DELIVERY_COST : 0;
+    const deliveryFee = isDelivery && totalItems > 0 ? getDeliveryCost() : 0;
     const grandTotal = subtotal + deliveryFee;
 
     // Synchronize Breakdown Row States
@@ -297,10 +311,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Build Itemized Text
     const itemsList = [];
     if (state.qtyDressed > 0) {
-      itemsList.push(`• Dressed Broilers: ${state.qtyDressed} (${formatNaira(state.costDressed)})`);
+      itemsList.push(`• Cleaned Chicken: ${state.qtyDressed} (${formatNaira(state.costDressed)})`);
     }
     if (state.qtyLive > 0) {
-      itemsList.push(`• Live Pen Broilers: ${state.qtyLive} (${formatNaira(state.costLive)})`);
+      itemsList.push(`• Live Chicken: ${state.qtyLive} (${formatNaira(state.costLive)})`);
     }
     if (state.qtyEggs > 0) {
       itemsList.push(`• Egg Crates: ${state.qtyEggs} (${formatNaira(state.costEggs)})`);
@@ -308,35 +322,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const customerName = inputName ? inputName.value.trim() : 'Guest';
     const customerPhone = inputPhone ? inputPhone.value.trim() : 'Unspecified';
-    const fulfillmentLabel = state.isDelivery ? 'Direct Delivery' : 'Farm Gate Pickup';
+    const fulfillmentLabel = state.isDelivery ? 'Delivery' : 'Farm Pickup';
     const destination = state.isDelivery && inputAddress && inputAddress.value.trim() 
       ? inputAddress.value.trim() 
-      : 'Farm Gate Collection';
-    const preferredDate = inputDate && inputDate.value ? inputDate.value : 'Immediate / Next Available Slot';
-    const instructions = inputNotes && inputNotes.value.trim() ? inputNotes.value.trim() : 'Standard packaging';
+      : 'Farm Pickup';
+    const preferredDate = inputDate && inputDate.value ? inputDate.value : 'As Soon as Possible';
+    const instructions = inputNotes && inputNotes.value.trim() ? inputNotes.value.trim() : 'Standard packing';
 
     // Construct Payload
     const message = [
-      '*NEW ORDER - N FARMS*',
+      '*New Order - N Farms*',
       '-------------------------',
       `• Customer: ${customerName}`,
       `• Phone: ${customerPhone}`,
       `• Batch Ref: ${selectedBatchId}`,
       '',
-      '*Order Items:*',
+      '*Items:*',
       itemsList.join('\n'),
       '',
-      `*Fulfillment:* ${fulfillmentLabel}`,
+      `*How to Get It:* ${fulfillmentLabel}`,
       `*Address:* ${destination}`,
-      `*Preferred Date:* ${preferredDate}`,
-      `*Special Instructions:* ${instructions}`,
+      `*Date:* ${preferredDate}`,
+      `*Notes:* ${instructions}`,
       '-------------------------',
       `*Subtotal:* ${formatNaira(state.subtotal)}`,
-      `*Logistics:* ${state.isDelivery ? formatNaira(state.deliveryFee) : 'Free'}`,
+      `*Delivery Fee:* ${state.isDelivery ? formatNaira(state.deliveryFee) : 'Free'}`,
       `*Total:* ${formatNaira(state.grandTotal)}`
     ].join('\n');
 
-    const whatsappUrl = `https://wa.me/${FARM_WHATSAPP}?text=${encodeURIComponent(message)}`;
+    const whatsappUrl = `https://wa.me/${getFarmWhatsapp()}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
   };
 

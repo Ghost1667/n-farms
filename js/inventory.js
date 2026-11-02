@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const getStockBadgeConfig = (availableStock) => {
     if (availableStock === 0) {
       return {
-        label: 'Batch Sold Out',
+        label: 'Sold Out',
         dotColor: 'var(--text-muted)',
         textColor: 'var(--text-muted)',
         borderColor: 'var(--border)',
@@ -86,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (availableStock <= 50) {
       return {
-        label: 'Limited Stock',
+        label: 'Almost Gone',
         dotColor: 'var(--accent-warm)',
         textColor: 'var(--accent-warm)',
         borderColor: 'rgba(245, 158, 11, 0.25)',
@@ -95,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     return {
-      label: 'Stock Available',
+      label: 'In Stock',
       dotColor: 'var(--accent-green)',
       textColor: 'var(--accent-green)',
       borderColor: 'rgba(16, 185, 129, 0.25)',
@@ -116,15 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const { currentAge, progressPercent, daysRemaining, availableStock } = calculateBatchMetrics(primaryBatch);
     const badge = getStockBadgeConfig(availableStock);
 
+    // Apply admin config overrides if present
+    const adminInv = window.NFFarmsConfig ? window.NFFarmsConfig.getInventory('B-24-09') : null;
+
     // Update or inject live status pill
     const statusPill = primaryCard.querySelector('.status-pill');
     if (statusPill) {
       statusPill.style.backgroundColor = badge.bgColor;
       statusPill.style.borderColor = badge.borderColor;
       statusPill.style.color = badge.textColor;
-
-      const dot = statusPill.querySelector('.status-dot');
-      if (dot) dot.style.color = badge.dotColor;
 
       const pillText = statusPill.querySelector('span:not(.status-dot)');
       if (pillText) pillText.textContent = badge.label;
@@ -133,30 +133,44 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update progress meter and metric tags
     const progressLabel = primaryCard.querySelector('div[style*="justify-content: space-between"] span[style*="var(--accent-green)"]');
     if (progressLabel) {
-      progressLabel.textContent = `Day ${currentAge} of ${primaryBatch.targetHarvestAgeDays} (${progressPercent}%)`;
+      if (adminInv) {
+        progressLabel.textContent = `Day ${adminInv.day} of ${adminInv.totalDays} (${adminInv.progress}%)`;
+      } else {
+        progressLabel.textContent = `Day ${currentAge} of ${primaryBatch.targetHarvestAgeDays} (${progressPercent}%)`;
+      }
     }
 
     const progressBar = primaryCard.querySelector('div[style*="background-color: var(--accent-green)"]');
     if (progressBar) {
-      progressBar.style.width = `${progressPercent}%`;
+      if (adminInv) {
+        progressBar.style.width = adminInv.progress + '%';
+      } else {
+        progressBar.style.width = `${progressPercent}%`;
+      }
     }
 
     // Target harvest interval
     const harvestWindowText = primaryCard.querySelector('div:nth-child(2) span[style*="var(--accent-warm)"]');
     if (harvestWindowText) {
-      harvestWindowText.textContent = daysRemaining === 0 ? 'Harvest Active Today' : `In ${daysRemaining} Days`;
+      harvestWindowText.textContent = adminInv ? adminInv.harvestIn : (daysRemaining === 0 ? 'Ready Today' : `In ${daysRemaining} Days`);
     }
 
     // Update remaining count metric
     const stockQuantitySpan = primaryCard.querySelector('div[style*="grid-column: span 2"] span:last-child');
     if (stockQuantitySpan) {
-      stockQuantitySpan.textContent = `${availableStock} Birds Remaining`;
+      stockQuantitySpan.textContent = adminInv ? adminInv.available : `${availableStock} Left`;
+    }
+
+    // Update weight display
+    const weightSpan = primaryCard.querySelector('[data-admin-inv="B-24-09.weight"]');
+    if (weightSpan && adminInv) {
+      weightSpan.textContent = adminInv.weight;
     }
 
     // Adjust reservation CTA button state if sold out
     const reserveButton = primaryCard.querySelector('a.btn');
     if (reserveButton && availableStock === 0) {
-      reserveButton.textContent = 'Join Waitlist for Next Batch';
+      reserveButton.textContent = 'Get Alert for Next Batch';
       reserveButton.classList.remove('btn-primary');
       reserveButton.classList.add('btn-secondary');
       reserveButton.setAttribute('href', `order.html?item=broiler&batch=${primaryBatch.batchId}&waitlist=true`);

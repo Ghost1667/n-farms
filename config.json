@@ -1,0 +1,38 @@
+{
+  "prices": {
+    "dressed": 6500,
+    "live": 6000,
+    "eggs": 4200,
+    "delivery": 2500
+  },
+  "contact": {
+    "whatsapp": "2348000000000",
+    "phone": "2348000000000",
+    "hours": "Monday – Saturday, 7:00 AM – 5:00 PM"
+  },
+  "siteText": {
+    "heroTitle": "Chicken and eggs from our farm to your table.",
+    "heroLead": "See our chickens, order fresh meat and eggs, and know exactly where your food comes from.",
+    "aboutText": "Simple, honest farming. Healthy chickens, fresh eggs, and fair prices.",
+    "footerDesc": "Fresh chicken and eggs, direct from our farm."
+  },
+  "inventory": {
+    "B-24-09": {
+      "available": "140 Chickens Left",
+      "harvestIn": "4 Days",
+      "weight": "2.3kg – 2.6kg",
+      "day": 38,
+      "totalDays": 42,
+      "progress": 90
+    },
+    "table-eggs": {
+      "stock": "48 Crates Left",
+      "collected": "6:30 AM Today",
+      "bestBefore": "21 Days"
+    },
+    "L-18": {
+      "readyIn": "18 Days",
+      "amount": "About 600 Chickens"
+    }
+  }
+}

@@ -153,13 +153,12 @@ document.addEventListener('DOMContentLoaded', () => {
           animation: fadeIn 300ms ease-out forwards;
         ">
           <div style="display: flex; align-items: center; gap: 0.5rem;">
-            <span class="status-dot" style="color: var(--accent-green);"></span>
             <span style="font-size: 0.875rem; font-weight: 600; color: var(--accent-green); letter-spacing: 0.02em;">
-              Priority Allocated
+              You're on the List
             </span>
           </div>
           <p style="font-size: 0.875rem; color: var(--text-primary); margin: 0; text-align: center;">
-            You're on the priority drop list. Expect notification upon next harvest.
+            We'll let you know when new chickens are ready.
           </p>
         </div>
       `;

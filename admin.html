@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings | N Farms</title>
+  <meta name="description" content="N Farms admin settings">
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .lock-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+      display: flex; align-items: center; justify-content: center; z-index: 10000;
+    }
+    .lock-box {
+      background: #fff; padding: 2rem; border-radius: var(--radius);
+      max-width: 360px; width: 90%; text-align: center;
+    }
+    .export-note { font-size: 0.85rem; color: var(--color-text-muted); margin-top: 0.5rem; }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="brand-logo">N FARMS</a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-outline">Back to Site</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="container hero">
+      <div>
+        <span class="hero-kicker">Admin Settings</span>
+        <h1 class="hero-title">Edit Farm Settings</h1>
+        <p class="hero-lead">Change prices, stock, contact details, and site text. Export config.json and commit it to GitHub to apply changes for all users.</p>
+      </div>
+    </section>
+
+    <section class="container">
+      <div id="admin-lock" class="lock-overlay">
+        <div class="lock-box">
+          <h2 style="margin-bottom: 1rem;">Admin Access</h2>
+          <p style="margin-bottom: 1rem; font-size: 0.9rem; color: var(--color-text-muted);">Enter the admin password to unlock settings.</p>
+          <input type="password" id="admin-password" placeholder="Password" style="width: 100%; padding: 0.6rem 0.85rem; border: 1px solid var(--color-border); border-radius: var(--radius); margin-bottom: 1rem; font-size: 0.9rem;">
+          <button id="admin-unlock-btn" class="btn btn-primary btn-full">Unlock</button>
+          <p id="admin-lock-msg" style="color: #b91c1c; font-size: 0.85rem; margin-top: 0.75rem; display: none;">Incorrect password.</p>
+        </div>
+      <div id="admin-unlock" style="display: none;">
+        <div id="admin-save-msg" style="display: none; padding: 0.75rem 1rem; border-radius: var(--radius); margin-bottom: 1rem; font-size: 0.9rem;"></div>
+
+        <form id="admin-form" style="display: grid; gap: 2rem;">
+
+          <div class="card">
+            <h2 class="section-title">Prices</h2>
+            <div class="grid grid-cols-2">
+              <div class="field">
+                <label for="price-dressed">Cleaned Chicken (each)</label>
+                <input type="number" id="price-dressed" min="0" step="100" value="6500">
+              </div>
+              <div class="field">
+                <label for="price-live">Live Chicken (each)</label>
+                <input type="number" id="price-live" min="0" step="100" value="6000">
+              </div>
+              <div class="field">
+                <label for="price-eggs">Egg Crate (per crate)</label>
+                <input type="number" id="price-eggs" min="0" step="100" value="4200">
+              </div>
+              <div class="field">
+                <label for="price-delivery">Delivery Fee</label>
+                <input type="number" id="price-delivery" min="0" step="100" value="2500">
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="section-title">Contact Details</h2>
+            <div class="grid grid-cols-2">
+              <div class="field">
+                <label for="contact-whatsapp">WhatsApp Number</label>
+                <input type="tel" id="contact-whatsapp" value="2348000000000">
+              </div>
+              <div class="field">
+                <label for="contact-phone">Phone Number</label>
+                <input type="tel" id="contact-phone" value="2348000000000">
+              </div>
+              <div class="field" style="grid-column: span 2;">
+                <label for="contact-hours">Open Hours</label>
+                <input type="text" id="contact-hours" value="Monday – Saturday, 7:00 AM – 5:00 PM">
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h2 class="section-title">Inventory &amp; Stock</h2>
+            <div class="grid grid-cols-2">
+              <div class="field">
+                <label for="inv-B2409-available">Batch #B-24-09 — Available</label>
+                <input type="text" id="inv-B2409-available" value="140 Chickens Left">
+              </div>
+              <div class="field">
+                <label for="inv-B2409-harvestIn">Batch #B-24-09 — Harvest In</label>
+                <input type="text" id="inv-B2409-harvestIn" value="4 Days">
+              </div>
+              <div class="field">
+                <label for="inv-B2409-weight">Batch #B-24-09 — Weight</label>
+                <input type="text" id="inv-B2409-weight" value="2.3kg – 2.6kg">
+              </div>
+              <div class="field">
+                <label for="inv-B2409-day">Batch #B-24-09 — Day</label>
+                <input type="number" id="inv-B2409-day" min="0" value="38">
+              </div>
+              <div class="field">
+                <label for="inv-B2409-totalDays">Batch #B-24-09 — Total Days</label>
+                <input type="number" id="inv-B2409-totalDays" min="0" value="42">
+              </div>
+              <div class="field">
+                <label for="inv-B2409-progress">Batch #B-24-09 — Progress %</label>
+                <input type="number" id="inv-B2409-progress" min="0" max="100" value="90">
+              </div>
+              <div class="field">
+                <label for="inv-eggs-stock">Eggs — Stock</label>
+                <input type="text" id="inv-eggs-stock" value="48 Crates Left">
+              </div>
+              <div class="field">
+                <label for="inv-eggs-collected">Eggs — Collected</label>
+                <input type="text" id="inv-eggs-collected" value="6:30 AM Today">
+              </div>
+              <div class="field">
+                <label for="inv-eggs-bestBefore">Eggs — Best Before</label>
+                <input type="text" id="inv-eggs-bestBefore" value="21 Days">
+              </div>
+              <div class="field">
+                <label for="inv-L18-readyIn">Batch #L-18 — Ready In</label>
+                <input type="text" id="inv-L18-readyIn" value="18 Days">
+              </div>
+              <div class="field">
+                <label for="inv-L18-amount">Batch #L-18 — Amount</label>
+                <input type="text" id="inv-L18-amount" value="About 600 Chickens">
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h2 class="section-title">Site Text</h2>
+            <div class="field">
+              <label for="text-heroTitle">Home Page Title</label>
+              <input type="text" id="text-heroTitle" value="Chicken and eggs from our farm to your table.">
+            </div>
+            <div class="field">
+              <label for="text-heroLead">Home Page Description</label>
+              <input type="text" id="text-heroLead" value="See our chickens, order fresh meat and eggs, and know exactly where your food comes from.">
+            </div>
+            <div class="field">
+              <label for="text-aboutText">About Page Description</label>
+              <input type="text" id="text-aboutText" value="Simple, honest farming. Healthy chickens, fresh eggs, and fair prices.">
+            </div>
+            <div class="field">
+              <label for="text-footerDesc">Footer Description</label>
+              <input type="text" id="text-footerDesc" value="Fresh chicken and eggs, direct from our farm.">
+            </div>
+          </div>
+          <div class="card" style="display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center;">
+            <button type="button" id="btn-export-config" class="btn btn-primary">Export config.json</button>
+            <button type="button" id="admin-lock-btn" class="btn btn-outline">Lock Panel</button>
+            <p class="export-note">Download config.json, then upload it to your GitHub repo to apply changes for all users.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-inner">
+        <span class="footer-brand">N FARMS</span>
+        <p class="footer-desc">Fresh chicken and eggs, direct from our farm.</p>
+        <nav class="footer-nav">
+          <a href="index.html" class="footer-link">Home</a>
+          <a href="inventory.html" class="footer-link">Our Chickens</a>
+          <a href="order.html" class="footer-link">Place Order</a>
+          <a href="about.html" class="footer-link">About</a>
+          <a href="contact.html" class="footer-link">Contact</a>
+        </nav>
+        <p class="footer-copyright">Open Monday – Saturday, 7:00 AM – 5:00 PM</p>
+        <p class="footer-copyright">&copy; 2026 N Farms. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  <script src="js/config.js" defer></script>
+  <script>
+    const ADMIN_PASSWORD_HASH = '48efda4923d3144aa3a655879f88957efd81fbef603509587bba711a53562008';
+
+    const sha256 = async (msg) => {
+      const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(msg));
+      return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+    };
+
+    const lockPanel = () => {
+      document.getElementById('admin-lock').style.display = 'flex';
+      document.getElementById('admin-unlock').style.display = 'none';
+      document.getElementById('admin-password').value = '';
+    };
+
+    const unlockPanel = async () => {
+      const pwd = document.getElementById('admin-password').value;
+      const hash = await sha256(pwd);
+      if (hash === ADMIN_PASSWORD_HASH) {
+        document.getElementById('admin-lock').style.display = 'none';
+        document.getElementById('admin-unlock').style.display = 'block';
+        loadFormValues();
+      } else {
+        const msg = document.getElementById('admin-lock-msg');
+        msg.style.display = 'block';
+        setTimeout(() => { msg.style.display = 'none'; }, 3000);
+      }
+    };
+
+    document.getElementById('admin-unlock-btn').addEventListener('click', unlockPanel);
+    document.getElementById('admin-password').addEventListener('keypress', (e) => { if (e.key === 'Enter') unlockPanel(); });
+    document.getElementById('admin-lock-btn').addEventListener('click', lockPanel);
+
+    const loadFormValues = async () => {
+      try {
+        const res = await fetch('config.json', { cache: 'no-cache' });
+        const cfg = await res.json();
+        document.getElementById('price-dressed').value = cfg.prices.dressed;
+        document.getElementById('price-live').value = cfg.prices.live;
+        document.getElementById('price-eggs').value = cfg.prices.eggs;
+        document.getElementById('price-delivery').value = cfg.prices.delivery;
+        document.getElementById('contact-whatsapp').value = cfg.contact.whatsapp;
+        document.getElementById('contact-phone').value = cfg.contact.phone;
+        document.getElementById('contact-hours').value = cfg.contact.hours;
+        document.getElementById('text-heroTitle').value = cfg.siteText.heroTitle;
+        document.getElementById('text-heroLead').value = cfg.siteText.heroLead;
+        document.getElementById('text-aboutText').value = cfg.siteText.aboutText;
+        document.getElementById('text-footerDesc').value = cfg.siteText.footerDesc;
+        document.getElementById('inv-B2409-available').value = cfg.inventory['B-24-09'].available;
+        document.getElementById('inv-B2409-harvestIn').value = cfg.inventory['B-24-09'].harvestIn;
+        document.getElementById('inv-B2409-weight').value = cfg.inventory['B-24-09'].weight;
+        document.getElementById('inv-B2409-day').value = cfg.inventory['B-24-09'].day;
+        document.getElementById('inv-B2409-totalDays').value = cfg.inventory['B-24-09'].totalDays;
+        document.getElementById('inv-B2409-progress').value = cfg.inventory['B-24-09'].progress;
+        document.getElementById('inv-eggs-stock').value = cfg.inventory['table-eggs'].stock;
+        document.getElementById('inv-eggs-collected').value = cfg.inventory['table-eggs'].collected;
+        document.getElementById('inv-eggs-bestBefore').value = cfg.inventory['table-eggs'].bestBefore;
+        document.getElementById('inv-L18-readyIn').value = cfg.inventory['L-18'].readyIn;
+        document.getElementById('inv-L18-amount').value = cfg.inventory['L-18'].amount;
+      } catch (e) {
+        console.warn('Could not load config.json for editing', e);
+      }
+    };
+
+    const getVal = (id) => document.getElementById(id).value.trim();
+    const getNum = (id) => parseInt(document.getElementById(id).value, 10) || 0;
+
+    document.getElementById('btn-export-config').addEventListener('click', () => {
+      const config = {
+        prices: {
+          dressed: getNum('price-dressed'),
+          live: getNum('price-live'),
+          eggs: getNum('price-eggs'),
+          delivery: getNum('price-delivery')
+        },
+        contact: {
+          whatsapp: getVal('contact-whatsapp'),
+          phone: getVal('contact-phone'),
+          hours: getVal('contact-hours')
+        },
+        siteText: {
+          heroTitle: getVal('text-heroTitle'),
+          heroLead: getVal('text-heroLead'),
+          aboutText: getVal('text-aboutText'),
+          footerDesc: getVal('text-footerDesc')
+        },
+        inventory: {
+          'B-24-09': {
+            available: getVal('inv-B2409-available'),
+            harvestIn: getVal('inv-B2409-harvestIn'),
+            weight: getVal('inv-B2409-weight'),
+            day: getNum('inv-B2409-day'),
+            totalDays: getNum('inv-B2409-totalDays'),
+            progress: getNum('inv-B2409-progress')
+          },
+          'table-eggs': {
+            stock: getVal('inv-eggs-stock'),
+            collected: getVal('inv-eggs-collected'),
+            bestBefore: getVal('inv-eggs-bestBefore')
+          },
+          'L-18': {
+            readyIn: getVal('inv-L18-readyIn'),
+            amount: getVal('inv-L18-amount')
+          }
+        }
+      };
+
+      const blob = new Blob([JSON.stringify(config, null, 2)], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'config.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+
+      const msg = document.getElementById('admin-save-msg');
+      msg.textContent = 'config.json downloaded. Upload it to your GitHub repo to apply changes.';
+      msg.style.color = '#059669';
+      msg.style.display = 'block';
+      setTimeout(() => { msg.style.display = 'none'; }, 4000);
+    });
+
+    lockPanel();
+  </script>
+</body>
+</html>
+      </div>
